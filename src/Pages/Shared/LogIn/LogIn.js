@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const LogIn = () => {
@@ -9,6 +9,7 @@ const LogIn = () => {
         setLoading} = useContext(AuthContext);
 
     const [userEmail, setUserEmail] = useState('');
+    const navigate = useNavigate();
 
     const handleLogIn = event => {
         event.preventDefault();
@@ -24,6 +25,7 @@ const LogIn = () => {
             console.log(result.user);
             form.reset('');
             toast.success('Successfully Logged In');
+            navigate('/home');
         })
         .catch(error => {
             console.error(error.message);
@@ -37,6 +39,7 @@ const LogIn = () => {
             .then( (result) => {
                 console.log(result.user);
                 toast.success('Google Log In Successful.');
+                navigate('/home');
             })
             .catch(error => {
                 console.error(error);

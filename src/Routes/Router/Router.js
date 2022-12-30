@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../../layout/Main";
 import About from "../../Pages/About/About";
+import DetailPost from "../../Pages/DetailPost/DetailPost";
 import Home from "../../Pages/Home/Home";
 import Media from "../../Pages/Media/Media";
 import ErrorPage from "../../Pages/Shared/ErrorPage/ErrorPage";
@@ -29,6 +30,11 @@ const router = createBrowserRouter([
             {
                 path: '/media',
                 element: <Media/>
+            },
+            {
+                path: '/mediaDetail/:id',
+                element: <DetailPost></DetailPost>,
+                loader: ({ params }) => fetch(`https://social-media-platform-server.vercel.app/myMedia/${params.id}`)
             },
             {
                 path: '/login',

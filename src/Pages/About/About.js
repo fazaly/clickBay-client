@@ -9,7 +9,7 @@ const About = () => {
     const [refresh, setRefresh] = useState(false)
 
     useEffect(() => {
-        fetch('http://localhost:5000/about')
+        fetch('https://social-media-platform-server.vercel.app/about')
         .then( res => res.json())
         .then( data => {
             // console.log(data);

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { toast } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const imageHostKey = process.env.REACT_APP_imgbb_key;
@@ -8,6 +8,8 @@ const imageHostKey = process.env.REACT_APP_imgbb_key;
 const SignUp = () => {
 
     const {createUser, signInWithGoogle, loading, updateUserProfile} = useContext(AuthContext);
+
+    const navigate = useNavigate();
 
     const handleSignUp = (e) => {
         e.preventDefault()
@@ -35,7 +37,9 @@ const SignUp = () => {
                         }
                         updateUserProfile(userInfo)
                             .then(() => {
-                                form.reset()
+                                form.reset();
+                                toast.success('User Created Successfully');
+                                navigate('/');
                             })
                     })
                     .catch((err) => {
@@ -52,6 +56,7 @@ const SignUp = () => {
         .then( (result) => {
             console.log(result.user);
             toast.success('Google Log In Successful.');
+            navigate('/home');
         })
         .catch(error => {
             console.error(error);
